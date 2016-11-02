@@ -16,13 +16,13 @@ public class Player {
 	
 	public Player(BufferedImage img) {
 		this.img = img;
-		y = GameSurface.HEIGHT / 2 - this.HEIGHT / 2;
-		x = GameSurface.WIDTH / 3 - this.WIDTH / 2;
+		y = GameSurface.HEIGHT / 2 - HEIGHT / 2;
+		x = GameSurface.WIDTH / 3 - WIDTH / 2;
 		speed = COEF_SPEED;
 	}
 	
 	public void reset() {
-		y = GameSurface.HEIGHT / 2 - this.HEIGHT / 2;
+		y = GameSurface.HEIGHT / 2 - HEIGHT / 2;
 		speed = COEF_SPEED;
 	}
 
