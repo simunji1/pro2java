@@ -23,7 +23,7 @@ public class GameSurface extends JPanel {
 	private BufferedImage backgroundImage;
 	private Timer animationTimer;
 	private boolean paused = false;
-	private boolean gameRunning = true;
+	private boolean gameRunning = false;
 	private int backgroundPositionX = 0;
 	
 	public GameSurface() {

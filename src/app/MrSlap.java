@@ -7,11 +7,30 @@ import game.GameSurface;
 
 public class MrSlap extends JFrame {
 
+	private GameSurface gs;
+	
 	public MrSlap() {
-		GameSurface gs = new GameSurface();
+		gs = new GameSurface();
 		getContentPane().add(gs, "Center");
 		
 		pack();
+	}
+	
+	public void initGUI() {
+		setSize(GameSurface.WIDTH, GameSurface.HEIGHT);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("MrSlap");
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+	
+	public void start() {
+		gs = new GameSurface();
+		getContentPane().add(gs, "Center");
+		setVisible(true);
+		this.revalidate();
+		gs.repaint();
+		gs.prepareGameSurface();
 	}
 	
 	public static void main(String[] args) {
