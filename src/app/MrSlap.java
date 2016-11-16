@@ -10,10 +10,10 @@ public class MrSlap extends JFrame {
 	private GameSurface gs;
 	
 	public MrSlap() {
-		gs = new GameSurface();
-		getContentPane().add(gs, "Center");
+		//gs = new GameSurface();
+		//getContentPane().add(gs, "Center");
 		
-		pack();
+		//pack();
 	}
 	
 	public void initGUI() {
@@ -26,11 +26,11 @@ public class MrSlap extends JFrame {
 	
 	public void start() {
 		gs = new GameSurface();
-		getContentPane().add(gs, "Center");
-		setVisible(true);
-		this.revalidate();
-		gs.repaint();
 		gs.prepareGameSurface();
+		getContentPane().add(gs, "Center");
+		gs.setVisible(true);
+		this.revalidate();
+		this.repaint();
 	}
 	
 	public static void main(String[] args) {
@@ -38,7 +38,8 @@ public class MrSlap extends JFrame {
 			@Override
 			public void run() {
 				MrSlap app = new MrSlap();
-				app.setVisible(true);
+				app.initGUI();
+				app.start();
 			}
 		});
 	}

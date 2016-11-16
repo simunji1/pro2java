@@ -1,12 +1,13 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Player {
-	public static final int WIDTH = 40;
-	public static final int HEIGHT = 40;
+	public static final int WIDTH = 55;
+	public static final int HEIGHT = 55;
 	private static final int COEF_ACCELERATION = 1;
 	private static final int COEF_SPEED = 2;
 	private BufferedImage img = null;
@@ -45,6 +46,11 @@ public class Player {
 	
 	public void paint(Graphics g) {
 		g.drawImage(img, x, y, null);
+		
+		if (GameSurface.DEBUG) {
+			g.setColor(Color.RED);
+			g.drawString("[x=" + x + ", y=" + y + ", speed=" + speed + "]", x, y - 5);
+		}
 	}
 	
 	public int getHeight() {

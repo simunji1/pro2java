@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,11 +16,13 @@ import image.FileImage;
 import image.Image;
 
 public class GameSurface extends JPanel {
+	public static final boolean DEBUG = true;
 	public static final int WIDTH = 1024;
 	public static final int HEIGHT = 768;
 	
 	public static final int SPEED = -2;
 	
+	private Player player;
 	private BufferedImage backgroundImage;
 	private Timer animationTimer;
 	private boolean paused = false;
@@ -27,12 +30,24 @@ public class GameSurface extends JPanel {
 	private int backgroundPositionX = 0;
 	
 	public GameSurface() {
+		//TODO
 		FileImage source = new FileImage();
 		source.fillMap();
 		source.setSource(Image.BACKGROUND.getKey());
 		
 		try {
 			backgroundImage = source.getImage();
+		} catch (IOException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		source.setSource(Image.PLAYER.getKey());
+		BufferedImage playerImage;
+		//player = new Player(null);
+		try {
+			playerImage = source.getImage();
+			player = new Player(playerImage);
 		} catch (IOException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -48,12 +63,18 @@ public class GameSurface extends JPanel {
 		//2.
 		g.drawImage(backgroundImage, backgroundPositionX + backgroundImage.getWidth(), 0, null);
 		
+		if (GameSurface.DEBUG) {
+			g.setColor(Color.RED);
+			g.drawString("[backgroundPositionX=" + backgroundPositionX + "]", 0, 10);
+		}
+		
+		player.paint(g);
 	}
 	
 	private void move() {
 		if (!paused && gameRunning) {
 			//TODO
-			
+			player.move();
 			//background
 			backgroundPositionX += GameSurface.SPEED;
 			if (backgroundPositionX == -backgroundImage.getWidth()) {
@@ -80,16 +101,17 @@ public class GameSurface extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					//TODO jump
+					player.kick();
 				}
 				if (e.getButton() == MouseEvent.BUTTON3) {
 					//TODO pause
 					if (gameRunning) {
-						paused = !paused;
 						if (paused) {
 							
 						} else {
 							
 						}
+						paused = !paused;
 					} else {
 						prepareNewGame();
 						startGame();
