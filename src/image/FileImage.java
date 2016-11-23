@@ -12,7 +12,8 @@ public class FileImage extends ImageSource {
 	@Override
 	public void fillMap() {
 		getMap().put(Image.BACKGROUND.getKey(), "background.png");	
-		getMap().put(Image.PLAYER.getKey(), "player.png");		
+		getMap().put(Image.PLAYER.getKey(), "player.png");	
+		getMap().put(Image.WALL.getKey(), "wall.png");
 	}
 
 	@Override

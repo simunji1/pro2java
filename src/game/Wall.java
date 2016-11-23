@@ -34,7 +34,7 @@ public class Wall {
 	
 	public void paint(Graphics g) {
 		g.drawImage(img, x, y, null);
-		g.drawImage(img, x, y - (GAP - GameSurface.HEIGHT), null);
+		g.drawImage(img, x, y - (GAP + GameSurface.HEIGHT), null);
 	}
 	
 	public void move() {

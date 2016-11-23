@@ -19,8 +19,8 @@ public class GameSurface extends JPanel {
 	public static final boolean DEBUG = true;
 	public static final int WIDTH = 1024;
 	public static final int HEIGHT = 768;
-	
 	public static final int SPEED = -2;
+	public static final int WALLS_COUNT = 4;
 	
 	private Player player;
 	private BufferedImage backgroundImage;
@@ -28,6 +28,9 @@ public class GameSurface extends JPanel {
 	private boolean paused = false;
 	private boolean gameRunning = false;
 	private int backgroundPositionX = 0;
+	private ListWalls listWalls;
+	private Wall actualWall;
+	private Wall previousWall;
 	
 	public GameSurface() {
 		//TODO
@@ -52,6 +55,29 @@ public class GameSurface extends JPanel {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
+		source.setSource(Image.WALL.getKey());
+		BufferedImage wallImage;
+		try {
+			wallImage = source.getImage();
+			Wall.setImg(wallImage);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		listWalls = new ListWalls();
+	}
+	
+	private void makeWalls() {
+		Wall wall;
+		int position = GameSurface.WIDTH;
+		for (int i = 0; i < WALLS_COUNT; i++) {
+			wall = new Wall(position);
+			listWalls.add(wall);
+			position = position + (GameSurface.WIDTH / 2);
+		}
+		position = position - GameSurface.WIDTH - Wall.WIDTH;
+		Wall.setLastWallPosition(position);
 	}
 	
 	public void paint(Graphics g) {
@@ -68,12 +94,19 @@ public class GameSurface extends JPanel {
 			g.drawString("[backgroundPositionX=" + backgroundPositionX + "]", 0, 10);
 		}
 		
+		for (Wall wall : listWalls) {
+			wall.paint(g);
+		}
+		
 		player.paint(g);
 	}
 	
 	private void move() {
 		if (!paused && gameRunning) {
 			//TODO
+			for (Wall wall : listWalls) {
+				wall.move();
+			}
 			player.move();
 			//background
 			backgroundPositionX += GameSurface.SPEED;
@@ -123,7 +156,7 @@ public class GameSurface extends JPanel {
 	}
 
 	protected void prepareNewGame() {
-		// TODO Auto-generated method stub
-		
+		// TODO
+		makeWalls();
 	}
 }
