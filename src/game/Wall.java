@@ -1,6 +1,8 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -9,6 +11,7 @@ public class Wall {
 	public static final int WIDTH = 65;
 	public static final int SPEED = -6;
 	public static final int GAP = 200;
+	public static final int POINTS_FOR_WALL = 1;
 	private Random random;
 	
 	//TODO
@@ -35,6 +38,11 @@ public class Wall {
 	public void paint(Graphics g) {
 		g.drawImage(img, x, y, null);
 		g.drawImage(img, x, y - (GAP + GameSurface.HEIGHT), null);
+		
+		if (GameSurface.DEBUG) {
+			g.setColor(Color.RED);
+			g.drawString("[x=" + x + ", y=" + y + ", height=" + height + "]", x, y - 5);
+		}
 	}
 	
 	public void move() {
@@ -65,5 +73,15 @@ public class Wall {
 		Wall.img = img;
 	}
 	
+	public Rectangle getLowerRect() {
+		return new Rectangle(x, y, WIDTH, height);
+	}
 	
+	public Rectangle getUpperRect() {
+		return new Rectangle(x, 0, WIDTH, GameSurface.HEIGHT - height - GAP);
+	}
+	
+	public void reset() {
+		generateGap();
+	}
 }
