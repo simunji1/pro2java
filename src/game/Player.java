@@ -36,7 +36,7 @@ public class Player {
 	}
 	
 	public void kick() {
-		speed = -20;
+		speed = -17;
 	}
 	
 	public void move() {

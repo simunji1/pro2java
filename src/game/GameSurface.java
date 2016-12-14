@@ -18,6 +18,7 @@ import javax.swing.Timer;
 
 import image.FileImage;
 import image.Image;
+import image.ImageManager;
 
 public class GameSurface extends JPanel {
 	public static final boolean DEBUG = false;
@@ -41,39 +42,11 @@ public class GameSurface extends JPanel {
 	private Font font;
 	private Font messageFont;
 	
-	public GameSurface() {
-		//TODO
-		FileImage source = new FileImage();
-		source.fillMap();
-		source.setSource(Image.BACKGROUND.getKey());
-		
-		try {
-			backgroundImage = source.getImage();
-		} catch (IOException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		source.setSource(Image.PLAYER.getKey());
-		BufferedImage playerImage;
-		//player = new Player(null);
-		try {
-			playerImage = source.getImage();
-			player = new Player(playerImage);
-		} catch (IOException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		source.setSource(Image.WALL.getKey());
-		BufferedImage wallImage;
-		try {
-			wallImage = source.getImage();
-			Wall.setImg(wallImage);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+	public GameSurface(ImageManager im) {
+		backgroundImage = im.getImage(Image.BACKGROUND);
+		player = new Player(im.getImage(Image.PLAYER));
+		Wall.setImg(im.getImage(Image.WALL));
+				
 		listWalls = new ListWalls();
 		makeLabels();
 	}
