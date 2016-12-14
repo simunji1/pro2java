@@ -7,7 +7,7 @@ import game.Player;
 import game.Wall;
 
 public enum Image {
-	PLAYER("slap", Player.WIDTH, Player.HEIGHT, new Color(0, 0, 255)),
+	PLAYER("player", Player.WIDTH, Player.HEIGHT, new Color(0, 0, 255)),
 	BACKGROUND("background", GameSurface.WIDTH * 2, GameSurface.HEIGHT, new Color(0, 255, 0)),
 	WALL("wall", Wall.WIDTH, GameSurface.HEIGHT, new Color(255, 0, 0));
 	

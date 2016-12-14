@@ -12,12 +12,14 @@ import javax.swing.SwingWorker;
 import game.GameSurface;
 import image.FileImage;
 import image.ImageManager;
+import image.URLImage;
 
 public class MrSlap extends JFrame {
 	private ImageManager im;
 	
 	public MrSlap() {
-		im = new ImageManager(new FileImage());
+		//im = new ImageManager(new FileImage());
+		im = new ImageManager(new URLImage());
 	}
 	
 	public void initGUI() {
